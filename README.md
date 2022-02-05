@@ -11,7 +11,7 @@
 <br />
 <div align="center">
 	<p>
-		<img alt="kubernetes Logo" src="https://raw.githubusercontent.com/ThoughtWorks-DPS/static/master/cncf.jpeg?sanitize=true" width="90" />
+		<img alt="CNCF Logo" src="https://raw.githubusercontent.com/ThoughtWorks-DPS/static/master/cncf.png?sanitize=true" width="90" />
 	</p>
 </div>
 <br />
