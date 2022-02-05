@@ -1,0 +1,23 @@
+# guestbook application
+
+# default to local, datacenter env must be specified, pull v0.0.0 from local registry
+env: local
+partof: guestbook
+#version: v0.0.0
+
+registry: localhost:5000
+image: guestbook
+replicas: 3
+resources:
+  requests:
+    memory: "64Mi"
+    cpu: "100m"
+  limits:
+    memory: "128Mi"
+    cpu: "250m"
+
+Ingress:
+  host: local.twdps.io
+  gateway: istio-system/local-gateway
+
+imagePullPolicy: Always

@@ -1,0 +1,43 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-slave
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+    app.kubernetes.io/version: {{ .Values.version }}
+    app.kubernetes.io/part-of: {{ .Values.partof }}
+    app.kubernetes.io/environment: {{ .Values.env }}
+    app: {{ .Release.Name }}
+    role: slave
+    version: {{ .Values.version }}
+spec:
+  replicas: {{ .Values.Slave.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+      role: slave
+      version: {{ .Values.version }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+        role: slave
+        version: {{ .Values.version }}
+    spec:
+      serviceAccountName: {{ .Release.Name }}
+      containers:
+      - image: {{ .Values.registry }}/{{ .Values.Slave.image }}:{{ .Values.Slave.version }}
+        imagePullPolicy: {{ .Values.imagePullPolicy }}
+        name: {{ .Release.Name }}-slave
+        ports:
+        - name: tcp-{{ .Release.Name }}
+          containerPort: 6379
+        resources:
+          requests:
+            memory: {{ .Values.Master.resources.requests.memory }}
+            cpu: {{ .Values.Master.resources.requests.cpu }}
+          limits:
+            memory: {{ .Values.Master.resources.limits.memory }}
+            cpu: {{ .Values.Master.resources.limits.cpu }}

@@ -1,0 +1,7 @@
+*.env
+.vscode
+*.crt
+*.pem
+*.key
+istio-*/
+Pipfile.lock

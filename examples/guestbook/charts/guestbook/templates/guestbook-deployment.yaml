@@ -1,0 +1,43 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+    app.kubernetes.io/version: {{ .Values.version }}
+    app.kubernetes.io/part-of: {{ .Values.partof }}
+    app.kubernetes.io/environment: {{ .Values.env }}
+    app: {{ .Release.Name }}
+    version: {{ .Values.version }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+        version: {{ .Values.version }}
+    spec:
+      serviceAccountName: {{ .Release.Name }}
+      containers:
+      - name: {{ .Release.Name }}
+        image: {{ .Values.registry }}/{{ .Values.image }}:{{ .Values.version }}
+        imagePullPolicy: {{ .Values.imagePullPolicy }}
+        ports:
+        - name: http-{{ .Release.Name }}
+          containerPort: 3000
+        resources:
+          requests:
+            memory: {{ .Values.resources.requests.memory }}
+            cpu: {{ .Values.resources.requests.cpu }}
+          limits:
+            memory: {{ .Values.resources.limits.memory }}
+            cpu: {{ .Values.resources.limits.cpu }}
+{{- if ne .Values.env "local" }}
+      imagePullSecrets:
+      - name: regcreds
+{{- end }}

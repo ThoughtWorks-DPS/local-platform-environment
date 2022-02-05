@@ -1,0 +1,4 @@
+apiVersion: v2
+name: Redis
+version: 1.0.0
+description: Cache resource for Guestbook application

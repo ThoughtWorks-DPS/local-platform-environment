@@ -1,0 +1,24 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+    app.kubernetes.io/version: {{ .Values.version }}
+    app.kubernetes.io/part-of: {{ .Values.partof }}
+    app.kubernetes.io/environment: {{ .Values.env }}
+    app: {{ .Release.Name }}
+    version: {{ .Values.version }}
+spec:
+  hosts:
+  - "{{ .Values.Ingress.host }}"
+  gateways:
+  - {{ .Values.Ingress.gateway }}
+  http:
+    - route:
+      - destination:
+          host: {{ .Release.Name }}.{{ .Release.Namespace }}.svc.cluster.local
+          port:
+            number: 3000

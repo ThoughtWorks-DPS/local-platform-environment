@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+    app.kubernetes.io/version: {{ .Values.version }}
+    app.kubernetes.io/part-of: {{ .Values.partof }}
+    app.kubernetes.io/environment: {{ .Values.env }}
+    app: {{ .Release.Name }}
+    version: {{ .Values.version }}
+spec:
+  ports:
+  - name: http-{{ .Release.Name }}
+    port: 3000
+    targetPort: 3000
+  selector:
+    app: {{ .Release.Name }}
