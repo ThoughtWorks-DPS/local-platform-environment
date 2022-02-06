@@ -4,35 +4,30 @@ from tasks.shared import is_local
 
 @task
 def add(ctx):
-    """deploy istio locally using istioctl and the istio operator"""
+    """deploy istio locally using istioctl"""
     if is_local():
-      ctx.run("bash tasks/istio_manifest.sh")
-      ctx.run("istioctl operator init && sleep 8")
-      ctx.run("cat istiotools/istio-manifest.yaml | kubectl apply -f - ")
+      print("Use installed version of istiosctl to install to local cluster")
+      ctx.run("istioctl install --set profile=default")
       
 
 @task
 def tools(ctx):
-    """deploy prometheus, grafana, jaeger, kiali to local kubernetes"""
-    KIALI_OPERATOR="""
-helm install \
---set cr.create=true \
---set cr.namespace=istio-system \
---set spec.auth.strategy=anonymous \
---namespace kiali-operator \
---repo https://kiali.org/helm-charts \
-kiali-operator kiali-operator  
-"""
+    """deploy prometheus, grafana, jaeger to local kubernetes"""
     if is_local():
-      ctx.run("kubectl apply --recursive -f istiotools/")
-      ctx.run(KIALI_OPERATOR)
+      ctx.run("kubectl apply --recursive -f istiotools/install-jaeger.yaml")
+      ctx.run("kubectl apply --recursive -f istiotools/install-prometheus.yaml")
+      ctx.run("kubectl apply --recursive -f istiotools/install-grafana.yaml")
+
+@task
+def kiali(ctx):
+    """deploy kiali"""
+    if is_local():
+      ctx.run("kubectl apply --recursive -f istiotools/install-kiali.yaml")
 
 @task
 def rm(ctx):
     """delete istio"""
     if is_local():
-      ctx.run("istioctl manifest generate | kubectl delete -f -")
+      ctx.run("kubectl delete --recursive -f istiotools/")
+      ctx.run("istioctl x uninstall --purge")
       ctx.run("kubectl delete ns istio-system --grace-period=0 --force")
-      ctx.run("kubectl delete ns istio-operator --grace-period=0 --force")
-      ctx.run("kubectl delete ns kiali-operator --grace-period=0 --force")
-      

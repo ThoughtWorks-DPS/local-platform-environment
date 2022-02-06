@@ -11,8 +11,8 @@ _Use `invoke -l` to see a list of available shortcuts._
 
 ### metric collectors 
 
-• metrics-server (0.5.0)  
-• kube-state-metrics (latest, v2.2.0)  
+• metrics-server (v0.6.0)  
+• kube-state-metrics (v2.3.0)  
 
 ```bash
 $ invoke metrics.add   
@@ -24,8 +24,9 @@ _Assumes istioctl matching the designed version of istio is installed locally. i
 
 ```bash
 $ inv istio.add
+$ inv istio.kiali
+$ inv istio.tools    # prometheus, grafana, jaeger
 ```
-
 
 ### opa-istio-plugin (pending)  
 
