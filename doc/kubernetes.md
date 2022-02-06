@@ -1,54 +1,57 @@
-## 3. Local Kubernetes install/setup (with userspace virtualization, on macos) 
+## 2. Local Kubernetes install/setup (with userspace virtualization, on macos) 
 
-Virtualization running in Userspace will consistently outperform full virtualization, all else being equal. RAM is a potentially critical requirement. (8gb at least in order to support istio.)  
-
-• [minikube](https://minikube.sigs.k8s.io) on [hyperkit(https://github.com/moby/hyperkit)], or  
-
-• [docker desktop](https://www.docker.com/products/docker-desktop) with kubernetes  
+There are many different local kubernetes options. Things to consider when choosing among various options:  
+- Metrics APIs: Can i run all the standard metrics apis? (metrics-server, kube-state-metrics)
+- Mesh: Does it support use of Istio?
+- Ingress: Is there a means of routing local traffic into the Istio ingress controller using the same url pattern as the live service?
+- Deployment: Can I use the exact same deployment mechanism (helm, argocd, kustomize) with local environment parameters to deploy containers?
 
 ### minikube
 
-• install hyperkit and minikube
+Virtualization running in Userspace will consistently outperform full virtualization, all else being equal. RAM is a potentially critical requirement.  
 
-_v1.23.0_ used for these examples.   
-
-```bash
-$ brew install hyperkit
-$ brew install minikube
-```
+• [minikube](https://minikube.sigs.k8s.io) on [hyperkit(https://github.com/moby/hyperkit)]  
 
 • configure minikube settings and start  
 
-These are very performant config setting, but adjust to fit your development hardware.  
+Typical settings for a MacBook Pro with 16Gb ram, but adjust to fit your machine.  
 
 ```bash
 $ minikube config set vm-driver hyperkit
-$ minikube config set memory 12288
-$ minikube config set cpus 6
+$ minikube config set memory 6144
+$ minikube config set cpus 4
 ```
 
-You can use the invoke helper script to start minikube wiith the following configuration:  
+Start minikube with the following options:  
+```bash
+$ minikube start \
+--insecure-registry "10.0.0.0/24" \  
+--addons registry \  
+--extra-config=kubelet.authentication-token-webhook=true \  
+--extra-config=kubelet.authorization-mode=Webhook \  
+--extra-config=scheduler.address=0.0.0.0 \  
+--extra-config=controller-manager.address=0.0.0.0  
+```
+
+To support rapid, local image build iterations, launch a local registry:  
+```bash
+$ nerdctl run -d --rm -it --name=registry-fwd --network=host alpine ash -c \"apk add socat && socat TCP-LISTEN:5000,reuseaddr,fork TCP:$(minikube ip):5000\"
+```
+
+Run the local loadbalancer to route traffic:  
+```bash
+$ minikube tunnel &
+```
+
+You can use the invoke helper script to start minikube wiith the above configuration:  
 ```bash
 $ inv k8s.start
 ```
 
---insecure-registry "10.0.0.0/24"  
---addons registry  
---extra-config=kubelet.authentication-token-webhook=true   
---extra-config=kubelet.authorization-mode=Webhook  
---extra-config=scheduler.address=0.0.0.0  
---extra-config=controller-manager.address=0.0.0.0  
-
-and this will run the minikbue registry network forwarder:  
-```
-$ docker run -d --rm -it --name=registry-fwd --network=host alpine ash -c "apk add socat && socat TCP-LISTEN:5000,reuseaddr,fork TCP:$(minikube ip):5000"
-```
-
-(_Use `minikube delete` to rermove the hyperkit vm and all configuration._)  
-
-To remove the registry network forwarder use:
+To remove the registry network forwarder use and delete the minikube vm:
 ```
 $ docker stop registry-fwd
+$ minikube delete
 ```
 
 ### Local k8s security profile

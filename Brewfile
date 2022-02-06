@@ -5,57 +5,37 @@ brew 'gnupg'
 brew 'hostess'
 brew 'mkcert'
 brew 'hyperkit'
+brew 'git-secrets'
 
 # languages support
 brew 'pyenv'
 brew 'rbenv'
 brew 'go'
-brew 'git-secrets'
 
-brew "minikube"
-brew "kubectl"
-brew "helm"
-brew "kubectx"
-brew "krew"
-brew "stern"
-brew "mkcert"
-brew "istioctl"
-brew "skaffold"
-brew "txn2/tap/kubefwd"
-
-brew "awscli"
-brew "aws-vault"
-brew "git-secrets"
-
-brew "hadolint"
-tap "instrumenta/instrumenta"
-brew "kubeval"
-
-
-
-
+# cloud vendors
 brew 'awscli'
 brew 'eksctl'
-
+brew 'aws-vault'
 brew 'chamber'
 
-
-brew 'hadolint'
-brew 'helm'
-brew 'k9s'
-brew 'kops'
+# cloud-native development
+brew 'colima'
+brew 'minikube'
+brew 'kubectl'
 brew 'kubectx'
-brew 'opa'
-brew 'packer'
-brew 'terraform'
-
-brew 'secrethub/tools/secrethub-cli'
-brew 'skaffold'
+brew 'krew'
 brew 'sonouoy'
+brew 'skaffold'
+brew 'helm'
 brew 'stern'
+brew 'txn2/tap/kubefwd'
+tap 'instrumenta/instrumenta'
+brew 'kubeval'
+
+brew 'terraform'
 brew 'terraform-docs'
 brew 'tflint'
-brew 'kubectl'
-brew 'colima'
-
-brew 'minikube'
+brew 'istioctl'
+brew 'hadolint'
+brew 'secrethub/tools/secrethub-cli'
+brew 'opa'

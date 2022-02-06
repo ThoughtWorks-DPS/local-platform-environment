@@ -8,3 +8,9 @@ kubectl apply --recursive -f metrics/kube-state-metrics/
 rm ksm-${latest}.zip
 
 
+
+
+
+
+
+
