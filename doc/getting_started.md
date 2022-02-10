@@ -140,18 +140,26 @@ uid                 [ unknown] Jane Doe <njane.doe@gmail.com>
 
 # add to git config
 
+```bash
 $ git config --global user.signingkey A8E47CAE38308EC9
 $ git config --global commit.gpgsign true
+```
 
 # copy to clipboard for pasting into github
+```bash
 keybase pgp export -q 5BE03B7DE63C0271 | pbcopy
+```
 
 # test
+```bash
 export GPG_TTY=$(tty)
 echo "test" | gpg --clearsign
+```
 
 # Set as default gpg key
+```bash
 $ $EDITOR ~/.gnupg/gpg.conf
+```
 
 # Add line:
 default-key 5BE03B7DE63C0271
