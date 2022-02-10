@@ -12,7 +12,7 @@ _see Brewfile for the complete list_
 [minikube]() • all-in-one local kubernetes, in dedicated virtual machine using hyperkit   
 [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) • kubernetes api command-line tool  
 [kubectx](https://github.com/ahmetb/kubectx) • cli to quickly swtich between local and remote k8s clusters  
-[sonouoy](https://github.com/vmware-tanzu/sonobuoy) • kubernetes conformance testing  
+[sonobuoy](https://github.com/vmware-tanzu/sonobuoy) • kubernetes conformance testing  
 
 [kubefwd](https://github.com/txn2/kubefwd) • develop locally with remotes services available as they would be in the remote cluster  
 [krew](https://github.com/kubernetes-sigs/krew/) kubectl plugin manager, mostly for cluster administrators   
