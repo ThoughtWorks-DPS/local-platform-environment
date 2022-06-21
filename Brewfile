@@ -4,7 +4,6 @@ brew 'gsed'
 brew 'gnupg'
 brew 'hostess'
 brew 'mkcert'
-brew 'hyperkit'
 brew 'git-secrets'
 
 # languages support

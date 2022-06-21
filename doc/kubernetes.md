@@ -10,7 +10,7 @@ There are many different local kubernetes options. Things to consider when choos
 
 Virtualization running in Userspace will consistently outperform full virtualization, all else being equal. RAM is a potentially critical requirement.  
 
-• [minikube](https://minikube.sigs.k8s.io) on [hyperkit(https://github.com/moby/hyperkit)]  
+• [minikube](https://minikube.sigs.k8s.io)
 
 • configure minikube settings and start  
 
