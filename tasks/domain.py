@@ -1,7 +1,6 @@
 from invoke import task
 from tasks.shared import is_local
       
-
 CREATE_DOMAIN_GATEWAY="""
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway

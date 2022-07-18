@@ -1,0 +1,18 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: opa-sidecar-config
+  namespace: httpbin-local
+data:
+  conf.yaml: |
+    discovery:
+      name: discovery
+      service: styra
+    labels:
+      system-id: f8d1bdca8d134f13985410ee9bd0ad6e
+      system-type: template.istio:1.0
+    services:
+    - name: styra
+      url: http://slp-istio-svc.opa-istio:8080/v1
+    - name: styra-bundles
+      url: http://slp-istio-svc.opa-istio:8080/v1/bundles

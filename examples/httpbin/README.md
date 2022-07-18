@@ -10,7 +10,7 @@ In particular, note that httpbin-virtual-service definition is the same for both
 
 ```bash
 $ kubectl get svc istio-ingressgateway -n istio-system  # get the IP for the istio-ingressgateway
-$ hostess add local.httpbin.org EXTERNAL-IP             # create a local entry, requires admin password
+$ sudo hostess add local.httpbin.org EXTERNAL-IP        # create a local entry, requires admin password
 ```
 
 **deploy httpbin without tls**:  
@@ -29,7 +29,7 @@ $ inv httpbin.deploy -tls
 
 The deploy will generate the necessary certificates for `local.httpbin.org` using the local Root CA and deploy these to istio-system on minikube.
 
-You can now use `https://local.httpbin.org`    
+You can now use `https://local.httpbin.org/`    
 
 Use curl to display header and certificate validation info  
 ```bash
@@ -101,7 +101,7 @@ You should see something like the following: (the IPs will match what you used t
 **clean up**
 ```bash
 $ inv httpbin.rm
-$ hostess rm local.httpbin.org
+$ sudo hostess rm local.httpbin.org
 ```
 
 [Return](doc/examples.md)

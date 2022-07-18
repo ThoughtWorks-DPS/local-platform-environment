@@ -3,24 +3,29 @@
 The python `invoke` files in this repository provide a convenient way to install the following services.  
 
 • [metrics-server](https://github.com/kubernetes-incubator/metrics-server)  
-• [kube-state-metrics](https://github.com/kubernetes/kube-state-metrics)  
 • [istio](https://istio.io)  
 • open policy agent (pending)
 
 _Use `invoke -l` to see a list of available shortcuts._  
 
-### metric collectors 
+### metric-server (hpa support) 
 
-• metrics-server (v0.6.0)  
-• kube-state-metrics (v2.3.0)  
+• metrics-server
 
-```bash
-$ invoke metrics.add   
+If you started minikube using the invoke helper command then metrics-server is already running.  
+
+Enter `$ minikube addons metrics-server enable` to start the api on an instance of minikube already running.  
+
+You can confirm metrics-server is functioning correctly by hitting the endpoint:  
+
+```
+$ kubectl get --raw "/apis/metrics.k8s.io/v1beta1/nodes"
+{"kind":"NodeMetricsList","apiVersion":"metrics.k8s.io/v1beta1","metadata":{},"items":[{"metadata":{"name":"minikube","creationTimestamp":"","labels":{"beta.kubernetes.io/arch":"amd64","beta.kubernetes.io/os":"linux","kubernetes.io/arch":"amd64","kubernetes.io/hostname":"minikube","kubernetes.io/os":"linux","minikube.k8s.io/commit":"f4b412861bb746be73053c9f6d2895f12cf78565","minikube.k8s.io/name":"minikube","minikube.k8s.io/primary":"true","minikube.k8s.io/updated_at":"","minikube.k8s.io/version":"v1.26.0","node-role.kubernetes.io/control-plane":"","node.kubernetes.io/exclude-from-external-load-balancers":""}},"timestamp":"","window":"1m0.147s","usage":{"cpu":"248760083n","memory":"1398756Ki"}}]}
 ```
 
 ### istio  
 
-_Assumes istioctl matching the designed version of istio is installed locally. istio v1.10.3 is used for these examples._  
+_Assumes istioctl matching the desired version of istio is installed locally. istio v1.14.1 is used for these examples._  
 
 ```bash
 $ inv istio.add

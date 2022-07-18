@@ -18,19 +18,16 @@ Typical settings for a MacBook Pro with 16Gb ram, but adjust to fit your machine
 
 ```bash
 $ minikube config set vm-driver hyperkit
-$ minikube config set memory 6144
+$ minikube config set memory 12288
 $ minikube config set cpus 4
 ```
 
 Start minikube with the following options:  
 ```bash
 $ minikube start \
---insecure-registry "10.0.0.0/24" \  
---addons registry \  
---extra-config=kubelet.authentication-token-webhook=true \  
---extra-config=kubelet.authorization-mode=Webhook \  
---extra-config=scheduler.address=0.0.0.0 \  
---extra-config=controller-manager.address=0.0.0.0  
+--container-runtime=containerd \
+--insecure-registry "10.0.0.0/24" \
+--addons metrics-server enable
 ```
 
 To support rapid, local image build iterations, launch a local registry:  
@@ -46,6 +43,7 @@ $ minikube tunnel &
 You can use the invoke helper script to start minikube wiith the above configuration:  
 ```bash
 $ inv k8s.start
+$ inv k8s.registsry  # launnches registry addon and port re-redirect container
 ```
 
 To remove the registry network forwarder use and delete the minikube vm:

@@ -1,6 +1,5 @@
 from invoke import task
 from tasks.shared import is_local
-from tasks import metrics
 from tasks import istio
 from tasks import dashboard
 from tasks import domain
@@ -13,21 +12,22 @@ def start(ctx):
 minikube start \
 --container-runtime=containerd \
 --insecure-registry "10.0.0.0/24" \
---addons registry \
---extra-config=kubelet.authentication-token-webhook=true \
---extra-config=kubelet.authorization-mode=Webhook \
---extra-config=scheduler.address=0.0.0.0 \
---extra-config=controller-manager.address=0.0.0.0
+--addons metrics-server enable \
 """
     ctx.run(START_K8S)
-    ctx.run("docker run -d --rm -it --name=registry-fwd --network=host alpine ash -c \"apk add socat && socat TCP-LISTEN:5000,reuseaddr,fork TCP:$(minikube ip):5000\"")
     ctx.run('minikube tunnel &')
 
+@task
+def registry(ctx):
+    """make the minikube registry work with local docker compatible daemon"""
+    if is_local():
+      ctx.run("minikube addons enable registry")
+      ctx.run("docker run -d --rm -it --name=registry-fwd --network=host alpine ash -c \"apk add socat && socat TCP-LISTEN:5000,reuseaddr,fork TCP:$(minikube ip):5000\"")
+    
 @task
 def init(ctx, localns, localdomain):
     """deploy locally metrics apis, istio, create specified local namespace and domain ingress"""
     if is_local():
-      metrics.add(ctx)
       istio.add(ctx)
       namespace.add(ctx, localns)
       domain.add(ctx, localdomain)
@@ -49,5 +49,5 @@ def reset(ctx):
 def rm(ctx):
     """delete current minikube vm instance and stop local registry"""
     if is_local():
-      ctx.run('docker stop registry-fwd')
+      # ctx.run('docker stop registry-fwd')
       ctx.run('minikube delete')

@@ -1,0 +1,81 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: slp-istio-svc
+  namespace: opa-istio
+  labels:
+    app: slp
+    system-type: istio
+spec:
+  ports:
+  - name: http
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: slp
+    system-type: istio
+
+---
+kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  name: slp-istio-app
+  namespace: opa-istio
+  labels:
+    app: slp
+    sytem-type: istio
+spec:
+  replicas: 1
+  serviceName: "slp-istio-app"
+  selector:
+    matchLabels:
+      app: slp
+      system-type: istio
+  template:
+    metadata:
+      labels:
+        sidecar.istio.io/inject: "false"
+        app: slp
+        system-type: istio
+    spec:
+      containers:
+      - name: slp
+        image: "styra/styra-local-plane:0.4.4"
+        args:
+          - "--config-file=/config/slp.yaml"
+          - "--addr=0.0.0.0:8080"
+        livenessProbe:
+          httpGet:
+            path: /v1/system/alive
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /v1/system/ready
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        volumeMounts:
+        - name: slp-config-vol
+          readOnly: true
+          mountPath: /config/slp.yaml
+          subPath: slp.yaml
+        - name: slp-scratch-vol
+          mountPath: /scratch
+      volumes:
+      - name: slp-config-vol
+        secret:
+          secretName: slp-istio
+  volumeClaimTemplates:
+  - metadata:
+      name: slp-scratch-vol
+      labels:
+        slp-pvc: slp-istio-app-pvc
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 2Gi
