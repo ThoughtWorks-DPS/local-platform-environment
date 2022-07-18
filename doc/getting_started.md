@@ -6,14 +6,12 @@
 
 _see Brewfile for the complete list_  
 
-[hyperkit](https://github.com/moby/hyperkit) • MacOS hypervisor, runs enirely in userspace  
 [colima](https://github.com/abiosoft/colima) • containerd runtime in linux virtual machine using hyperkit  
 [nerdctl](https://github.com/containerd/nerdctl) • cli interface to containerd  
-[minikube]() • all-in-one local kubernetes, in dedicated virtual machine using hyperkit   
+[minikube](https://github.com/kubernetes/minikube) • all-in-one local kubernetes, in dedicated virtual machine using docker   
 [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) • kubernetes api command-line tool  
 [kubectx](https://github.com/ahmetb/kubectx) • cli to quickly swtich between local and remote k8s clusters  
-[sonouoy](https://github.com/vmware-tanzu/sonobuoy) • kubernetes conformance testing  
-
+[sonobuoy](https://github.com/vmware-tanzu/sonobuoy) • kubernetes conformance testing  
 [kubefwd](https://github.com/txn2/kubefwd) • develop locally with remotes services available as they would be in the remote cluster  
 [krew](https://github.com/kubernetes-sigs/krew/) kubectl plugin manager, mostly for cluster administrators   
 (_some useful plugins_, e.g., `$ kubectl krew install konfig` )  
@@ -140,18 +138,26 @@ uid                 [ unknown] Jane Doe <njane.doe@gmail.com>
 
 # add to git config
 
+```bash
 $ git config --global user.signingkey A8E47CAE38308EC9
 $ git config --global commit.gpgsign true
+```
 
 # copy to clipboard for pasting into github
+```bash
 keybase pgp export -q 5BE03B7DE63C0271 | pbcopy
+```
 
 # test
+```bash
 export GPG_TTY=$(tty)
 echo "test" | gpg --clearsign
+```
 
 # Set as default gpg key
+```bash
 $ $EDITOR ~/.gnupg/gpg.conf
+```
 
 # Add line:
 default-key 5BE03B7DE63C0271
