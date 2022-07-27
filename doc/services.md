@@ -14,7 +14,7 @@ _Use `invoke -l` to see a list of available shortcuts._
 
 If you started minikube using the invoke helper command then metrics-server is already running.  
 
-Enter `$ minikube addons metrics-server enable` to start the api on an instance of minikube already running.  
+Enter `$ minikube addons enable metrics-server` to start the api on an instance of minikube already running.  
 
 You can confirm metrics-server is functioning correctly by hitting the endpoint:  
 
