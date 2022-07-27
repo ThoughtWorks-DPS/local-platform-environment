@@ -104,7 +104,7 @@ $ brew install gpg
 
 Create new personal key. (Note: you can skip if you already maintain your key via alternative means)
 ```bash
-$ Keybase pgp gen --multi
+$ keybase pgp gen --multi
 
 # If your gpg is running local then you should see the following
 
@@ -160,6 +160,8 @@ $ $EDITOR ~/.gnupg/gpg.conf
 ```
 
 # Add line:
+
+```bash
 default-key 5BE03B7DE63C0271
 ```
 There are couple different common ways of getting your local config to know to use the key for signing every time. 
@@ -172,7 +174,7 @@ Some people find that pinentry installed with brew does not allow the password t
 If you do not see "Save in Keychain" after following Method 1, try the GPG Suite versions, available from gpgtools.org, or from brew by running:
 
 ```bash
-$ brew cask install gpg-suite
+$ brew install gpg-suite --cask
 ```
 
 Once installed, open Spotlight and search for "GPGPreferences", or open system preferences and select "GPGPreferences." Select the Default Key if it is not already selected, and ensure "Store in OS X Keychain" is checked.
