@@ -6,6 +6,7 @@ brew 'hostess'
 brew 'mkcert'
 brew 'git-secrets'
 brew 'pre-commit'
+brew 'docker'
 
 # languages support
 brew 'pyenv'
