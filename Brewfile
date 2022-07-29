@@ -5,6 +5,7 @@ brew 'gnupg'
 brew 'hostess'
 brew 'mkcert'
 brew 'git-secrets'
+brew 'pre-commit'
 
 # languages support
 brew 'pyenv'
