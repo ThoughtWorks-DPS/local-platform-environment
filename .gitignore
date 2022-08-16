@@ -5,3 +5,4 @@
 *.key
 istio-*/
 Pipfile.lock
+bench.results

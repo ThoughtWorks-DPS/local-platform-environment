@@ -45,7 +45,7 @@ $ minikube tunnel &
 You can use the invoke helper script to start minikube wiith the above configuration:  
 ```bash
 $ inv k8s.start
-$ inv k8s.registsry  # launnches registry addon and port re-redirect container
+$ inv k8s.registry  # launnches registry addon and port re-redirect container
 ```
 
 To remove the registry network forwarder use and delete the minikube vm:
