@@ -5,11 +5,8 @@
     <br />
 		<img alt="DPS Title" src="https://raw.githubusercontent.com/ThoughtWorks-DPS/static/master/EMPCPlatformStarterKitsImage.png?sanitize=true" width=350/>
 	</p>
-  <h1>EMPC Platform Development Environment</h1>
-  <p>
-	© 2022 Thoughtworks, Inc. || Thoughtworks Pre-Existing Intellectual Property || All Rights Reserved
-  </p>
-  <h3>local-development-environment</h3>
+  <h3>EMPC Platform Development Environment</h3>
+  <h1>local-development-environment</h1>
 </div>
 <br />
 <div align="center">
