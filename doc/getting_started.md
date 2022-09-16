@@ -179,5 +179,92 @@ $ brew install gpg-suite --cask
 
 Once installed, open Spotlight and search for "GPGPreferences", or open system preferences and select "GPGPreferences." Select the Default Key if it is not already selected, and ensure "Store in OS X Keychain" is checked.
 
+## working with multiple SSH keys
 
+If you need to maintain multiple SSH and GPG signing keys, below is one strategy:  
+
+Edit your ~/.ssh/config file:  
+
+```bash
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_rsa
+  IdentitiesOnly yes
+
+Host github.com-company-1
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/company_1_id_rsa
+  IdentitiesOnly yes
+  
+Host bitbucket.org-company-2
+  HostName bitbucket.org
+  User git
+  IdentityFile ~/.ssh/company_2_id_rsa
+  IdentitiesOnly yes
+
+Host *
+  AddKeysToAgent yes
+  IdentitiesOnly yes
+  PreferredAuthentications publickey
+  UseKeychain yes
+  Compression yes
+```
+
+Edit your ~/.gitconfig file
+```bash
+[init]
+  defaultBranch = main
+
+[commit]
+  gpgsign = true
+
+# ...
+
+[user]
+  name = Jane Doe
+  useConfigOnly = true
+
+# optional (if you organize your repositories by ssh context)  
+
+[include]
+  path = ~/.gitconfig-default
+
+[includeIf "gitdir:~/github/company-1/"]
+  path = ~/.gitconfig-company-1
+
+[includeIf "gitdir:~/github/company-2/"]
+  path = ~/.gitconfig-company-2
+ ```
+ 
+ For each of the config specific files:  
+ 
+ ~/.gitconfig-default  
+ ```bash
+ [user]
+	   email = jdoe@thoughtworks.com
+	   signingkey = 5BE03B7DE63C0271
+ ```
+ 
+  ~/.gitconfig-company-1  
+ ```bash
+ [user]
+	  email = jdoe@company-1.com
+	  signingkey = 6F3B53E64B964B824
+
+[url "git@github.com-company-1"]
+	  insteadOf = git@github.com
+ ```
+ 
+   ~/.gitconfig-company-2  
+ ```bash
+  [user]
+	  email = jdoe@company-2.com
+	  signingkey = 3456753E64B964B824
+
+[url "git@bitbucket.org-company-2"]
+	  insteadOf = git@github.com
+ ```
+ 
 [Return](../README.md)
