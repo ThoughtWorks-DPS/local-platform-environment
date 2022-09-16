@@ -137,30 +137,30 @@ uid                 [ unknown] Jane Doe <jdoe@thoughtworks.com>
 uid                 [ unknown] Jane Doe <njane.doe@gmail.com>
 ```
 
-# add to git config
+#### add to git config
 
 ```bash
 $ git config --global user.signingkey A8E47CAE38308EC9
 $ git config --global commit.gpgsign true
 ```
 
-# copy to clipboard for pasting into github
+#### copy to clipboard for pasting into github
 ```bash
 keybase pgp export -q 5BE03B7DE63C0271 | pbcopy
 ```
 
-# test
+#### test
 ```bash
 export GPG_TTY=$(tty)
 echo "test" | gpg --clearsign
 ```
 
-# Set as default gpg key
+#### Set as default gpg key
 ```bash
 $ $EDITOR ~/.gnupg/gpg.conf
 ```
 
-# Add line:
+#### Add line:
 
 ```bash
 default-key 5BE03B7DE63C0271
@@ -180,7 +180,7 @@ $ brew install gpg-suite --cask
 
 Once installed, open Spotlight and search for "GPGPreferences", or open system preferences and select "GPGPreferences." Select the Default Key if it is not already selected, and ensure "Store in OS X Keychain" is checked.
 
-## working with multiple SSH keys
+### working with multiple SSH keys
 
 If you need to maintain multiple SSH and GPG signing keys, below is one strategy:  
 
