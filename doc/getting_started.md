@@ -44,7 +44,8 @@ _see Brewfile for the complete list_
 [terraform-docs](https://github.com/terraform-docs/terraform-docs) • generate documentation from Terraform modules  
 [tflint](https://github.com/terraform-linters/tflint) • terraform linter
 [hadolint](https://github.com/hadolint/hadolint) • Dockerfile lint/inspection  
-[secrethub-cli](https://github.com/secrethub/secrethub-cli) • cli to secrethub apis (deprecating in favor of 1password)  
+[1password-cli]([https://github.com/secrethub/secrethub-cli](https://developer.1password.com/docs/cli/get-started/)) • cli for 1password secrets-automation  
+[opw](https://github.com/ThoughtWorks-DPS/opw) • cli for writing (required for current version of 1password with secrets-automation. 
 [opa](https://github.com/open-policy-agent/opa) • Open Policy Agent  
 [awscli](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html) • aws api cli  
 [aws-vault](https://github.com/99designs/aws-vault) • local aws crednetial management  
