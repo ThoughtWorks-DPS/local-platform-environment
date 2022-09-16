@@ -32,6 +32,7 @@ _see Brewfile for the complete list_
 - _view-allocations_. Shows cluster cpu and memory allocations    
 - _view-utilization_. Shows cluster cpu and memory utilization  
 - _who-can_. like can-i but evaluates who at a permission level  
+
 [helm](https://helm.sh) • manage kubernetes deployments  
 [stern](https://github.com/wercker/stern)  • tails logs to the terminal from any number of local or remote pods  
 [skaffold](https://github.com/GoogleContainerTools/skaffold) • continuous development on local kubernetes  
