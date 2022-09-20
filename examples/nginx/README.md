@@ -4,7 +4,7 @@ The Apple Silicon architecture creates some challenges since both the local kube
 
 ### Alternative kubernetes deployment
 
-This example will use k3d as the local kubernetes installation. You can install k3d using hombrew.  
+This example will use k3d as the local kubernetes installation. You can install k3d using homebrew.  
 
 ```bash
 brew install k3d
