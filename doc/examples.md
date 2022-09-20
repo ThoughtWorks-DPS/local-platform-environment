@@ -5,8 +5,6 @@ The code examples focus on different aspects of developing locally for kubernete
 1. [Httpbin](../examples/httpbin/README.md): Local tls ingress and domain name resolution.  
 1. [Guestbook](../examples/guestbook/README.md): Helm and deploy to minikube from local registry  
 1. [opa-styra](../examples/opa/README.md): Expands on the httpbin example to demonstrate the use of OPA sidecars and Styra
-
-
-
+1. [nginx](../examples/nginx/README.md): M1 Mac example using nginx  
 
 [Return](../README.md)

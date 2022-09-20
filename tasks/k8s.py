@@ -18,6 +18,18 @@ minikube start \
     ctx.run('minikube tunnel &')
 
 @task
+def startM1(ctx):
+    """start minikube with extra-config values and tunnel lb"""
+    START_K8S="""
+minikube start \
+--driver=podman \
+--insecure-registry "10.0.0.0/24" \
+--addons metrics-server enable \
+"""
+    ctx.run(START_K8S)
+    ctx.run('minikube tunnel &')
+
+@task
 def registry(ctx):
     """make the minikube registry work with local docker compatible daemon"""
     if is_local():

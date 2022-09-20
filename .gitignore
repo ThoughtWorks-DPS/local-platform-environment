@@ -6,3 +6,4 @@
 istio-*/
 Pipfile.lock
 bench.results
+.DS_Store

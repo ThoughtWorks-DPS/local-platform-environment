@@ -7,6 +7,7 @@ from tasks import httpbin
 from tasks import domain
 from tasks import namespace
 from tasks import opa
+from tasks import nginx
 
 ns = Collection()
 
@@ -17,3 +18,4 @@ ns.add_collection(httpbin)
 ns.add_collection(domain)
 ns.add_collection(namespace, name="ns")
 ns.add_collection(opa)
+ns.add_collection(nginx)
