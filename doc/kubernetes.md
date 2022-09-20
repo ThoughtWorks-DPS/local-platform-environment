@@ -14,7 +14,7 @@ Virtualization running in Userspace will consistently outperform full virtualiza
 
 • configure minikube settings and start  
 
-• Note, m1 (apple silicon) macs do not support hyperkit. A list of alternatives for vm-driver is here: https://minikube.sigs.k8s.io/docs/drivers/
+• Note, There is now Apple Silicon support from at least v1.27.0 (experienced issues with earlier versions though those may be resolvable). Keep in mind that in the latest versions the tunnel configuration will wait for LoadBalance service definition to launch specific handlers and the local network ip may be just localhost. See the alternative Silicon setup in the nginx example.    
 
 Typical settings for a MacBook Pro with 16Gb ram, but adjust to fit your machine.  
 
