@@ -5,7 +5,7 @@
     <br />
 		<img alt="DPS Title" src="https://raw.githubusercontent.com/ThoughtWorks-DPS/static/master/EMPCPlatformStarterKitsImage.png?sanitize=true" width=350/>
 	</p>
-  <h3>EMPC Platform Development Environment</h3>
+  <h3>Platform Development Environment</h3>
   <h1>local-development-environment</h1>
 </div>
 <br />
