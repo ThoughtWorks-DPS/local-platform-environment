@@ -34,7 +34,7 @@ _see Brewfile for the complete list_
 - _who-can_. like can-i but evaluates who at a permission level  
 
 [helm](https://helm.sh) • manage kubernetes deployments  
-[stern](https://github.com/wercker/stern)  • tails logs to the terminal from any number of local or remote pods  
+[stern](https://github.com/stern/stern)  • tails logs to the terminal from any number of local or remote pods (fork of discontinued wercker/stern)
 [skaffold](https://github.com/GoogleContainerTools/skaffold) • continuous development on local kubernetes  
 [kubeval](https://github.com/garethr/kubeval) • k8 yaml lint/inspection  
 
